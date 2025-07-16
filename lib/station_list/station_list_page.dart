@@ -20,14 +20,7 @@ class StationListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
-      ),
-      backgroundColor: Colors.white,
+      appBar: AppBar(title: Text(title), centerTitle: true),
       body: ListView.separated(
         itemCount: stations.length,
         itemBuilder: (context, index) {

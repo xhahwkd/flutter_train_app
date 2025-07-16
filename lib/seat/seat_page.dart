@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_train_reservation_app/seat/widget/alphabet_box.dart';
-import 'package:flutter_train_reservation_app/seat/widget/seat_box.dart';
 import 'package:flutter_train_reservation_app/seat/widget/seat_line.dart';
 
 class SeatPage extends StatefulWidget {
@@ -114,48 +113,51 @@ class _SeatPageState extends State<SeatPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 60,
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SizedBox(
+                  height: 60,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    "예매하기",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                    child: Text(
+                      "예매하기",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    onPressed: (selectedSeat != null)
+                        ? () {
+                            showCupertinoDialog(
+                              context: context,
+                              builder: (_) => CupertinoAlertDialog(
+                                title: Text("예매 하시겠습니까?"),
+                                content: Text("좌석: $selectedSeat"),
+                                actions: [
+                                  CupertinoDialogAction(
+                                    child: Text("취소"),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                  CupertinoDialogAction(
+                                    child: Text("확인"),
+                                    onPressed: () {
+                                      Navigator.pop(context); // 다이얼로그 닫기
+                                      Navigator.pop(context); // SeatPage 닫기
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        : null,
                   ),
-                  onPressed: (selectedSeat != null)
-                      ? () {
-                          showCupertinoDialog(
-                            context: context,
-                            builder: (_) => CupertinoAlertDialog(
-                              title: Text("예매 하시겠습니까?"),
-                              content: Text("좌석: $selectedSeat"),
-                              actions: [
-                                CupertinoDialogAction(
-                                  child: Text("취소"),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                                CupertinoDialogAction(
-                                  child: Text("확인"),
-                                  onPressed: () {
-                                    Navigator.pop(context); // 다이얼로그 닫기
-                                    Navigator.pop(context); // SeatPage 닫기
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                      : null,
                 ),
               ),
             ],

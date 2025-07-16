@@ -17,12 +17,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('기차 예매'),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ), //AppBar 타이틀
-      body: Padding(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black
+          : Colors.grey[200],
+      appBar: AppBar(title: Text('기차 예매'), centerTitle: true), //AppBar 타이틀
+      body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +30,9 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: 200,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey.withOpacity(0.2) // 다크모드: 투명한 회색
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage> {
                         }
                       },
                     ),
+                    Container(width: 2, height: 50, color: Colors.grey[400]),
                     SelectStationBox(
                       title: "도착역",
                       selectedStation: arrivalStation,
@@ -113,7 +115,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      backgroundColor: Colors.grey[200],
     );
   }
 }
