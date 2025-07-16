@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_train_reservation_app/home/widget/select_station_box.dart';
 import 'package:flutter_train_reservation_app/seat/seat_page.dart';
+import 'package:flutter_train_reservation_app/station_list/station_list_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String? departureStation;
+  String? arrivalStation;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +38,40 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SelectStationBox("출발역"),
-                    Container(width: 2, height: 50, color: Colors.grey[400]),
-                    SelectStationBox("도착역"),
+                    SelectStationBox(
+                      title: "출발역",
+                      selectedStation: departureStation,
+                      onTap: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StationListPage(),
+                          ),
+                        );
+                        if (result != null) {
+                          setState(() {
+                            departureStation = result;
+                          });
+                        }
+                      },
+                    ),
+                    SelectStationBox(
+                      title: "도착역",
+                      selectedStation: arrivalStation,
+                      onTap: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StationListPage(),
+                          ),
+                        );
+                        if (result != null) {
+                          setState(() {
+                            arrivalStation = result;
+                          });
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -47,12 +87,14 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SeatPage()),
-                  );
-                },
+                onPressed: (departureStation != null && arrivalStation != null)
+                    ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SeatPage()),
+                        );
+                      }
+                    : null,
                 child: Text(
                   "좌석 선택",
                   style: TextStyle(
