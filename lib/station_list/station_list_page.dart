@@ -15,21 +15,24 @@ class StationListPage extends StatelessWidget {
     '부산',
   ];
   final String title;
-  StationListPage({required this.title, Key? key}) : super(key: key);
+  final String? excludeStation;
+
+  StationListPage({required this.title, this.excludeStation, Key? key})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final filteredStations = excludeStation == null
+        ? stations
+        : stations.where((station) => station != excludeStation).toList();
     return Scaffold(
       appBar: AppBar(title: Text(title), centerTitle: true),
       body: ListView.separated(
-        itemCount: stations.length,
+        itemCount: filteredStations.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(stations[index], style: TextStyle(fontSize: 16)),
-            onTap: () {
-              Navigator.pop(context, stations[index]);
-              return; // 선택 시 결과 반환
-            },
+            title: Text(filteredStations[index]),
+            onTap: () => Navigator.pop(context, filteredStations[index]),
           );
         },
         separatorBuilder: (context, index) =>
