@@ -14,12 +14,14 @@ class StationListPage extends StatelessWidget {
     '울산',
     '부산',
   ];
+  final String title;
+  StationListPage({required this.title, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("출발역"),
+        title: Text(title),
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
