@@ -1,16 +1,22 @@
-# flutter_train_reservation_app
+<h1 align="center">
+기차 예매 서비스 앱
+</h1>
+<br>
 
-A new Flutter project.
+<h3>
+프로젝트 개요
+</h3>
+“기차 예매 서비스 앱" 은 기차 예매를 할 수 있게끔 서비스를 제공하는 앱입니다.
 
-## Getting Started
+<h3>
+주요 기능
+</h3>
+## ver.1<br>
+- 출발역/도착역 선택 가능<br>
+- 역 리스트 보기 가능<br>
+- 좌석 선택 기능<br>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h3>
+주의사항
+</h3>
+-
